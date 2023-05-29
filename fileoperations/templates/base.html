@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File operations</title>
+
+    <style>
+        * {
+            background-color: white;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .main {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: column;
+            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 3px solid grey;
+            border-radius: 10px;
+            align-items: center;
+            background-color: white;
+            gap: 1.5rem;
+            height: 100px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            text-align: center;
+            border-radius: 10px;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        input[type="submit"] {
+            width: -moz-fit-content;
+            width: fit-content;
+            color: black;
+            background-color: rgb(211, 209, 209);
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="findroot" method="post">
+        <div class="main">
+            <div class="form">
+                <div class="input_container">
+                    <input type="text" placeholder="Enter Filename" name="filename"><br>
+                </div>
+                <input type="submit" value="submit"><br>
+            </div>
+            <div class="result">
+                {% if list %}
+                <ul>
+                    {% for i in list %}
+                    <li>
+                        {{i}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {%else%}
+                {{msg}}
+                {%endif%}
+            </div>
+        </div>
+
+    </form>
+</body>
+
+</html>

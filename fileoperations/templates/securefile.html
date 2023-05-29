@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure file</title>
+    <style>
+        * {
+            background-color: white;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .main {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+            flex-direction: column;
+            gap: 3rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            border: 3px solid grey;
+            border-radius: 10px;
+            align-items: center;
+            background-color: white;
+            gap: 1.5rem;
+            height: 150px;
+            width: 300px;
+        }
+
+        input[type="text"] {
+            text-align: center;
+            border-radius: 10px;
+            color: black;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        input[type="submit"] {
+            width: -moz-fit-content;
+            width: fit-content;
+            color: black;
+            background-color: rgb(211, 209, 209);
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        select[name="command"] {
+            width: 150px;
+            color: black;
+            background-color: rgb(211, 209, 209);
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <form action="securefile" method="post">
+        <div class="main">
+            <div class="form">
+        <input type="text" name = "firstfile" placeholder="Enter file name">
+        <input type="text" name = "secondfile" placeholder="Enter file name">
+        <select name="command" >
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select>
+        <input type="submit" value="Submit">
+    </div>
+        {% if message %}
+            {{message}}
+        {% endif %}
+    </div>
+    </form>
+</body>
+</html>
