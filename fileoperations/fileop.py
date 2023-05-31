@@ -1,11 +1,24 @@
+"""
+Missing requirements.txt file
+Missing .gitignore file
+Missing docstrings to endpoints
+Unneccesssary print statements
+TASK 1 => when I encrypt file salad recipe.txt => encrypted file is created but no data present so when decrypt the same no data is retrieve => task 1 is fails
+TASK 2 => `Update files in the destination directory if they exist in both directories but have different content` This is requirment
+but progam does not update file but overwrite it meaning destination file content is repalced with source file content.
+TASK 3 => It works good but for C:/ disk only but we can implement for other as well. Requirement specified to take folder
+to search into but program take look into all folders - GOOD 
+Frontend dev is GOOD 
+"""
 from flask import Flask,request,render_template
 import os
+from dotenv import load_dotenv
 
 # for comparison of files
 import filecmp
 # for copying file from source to destination
 import shutil
-
+load_dotenv()
 fileop = Flask(__name__)
 
 
@@ -140,7 +153,7 @@ def synchronization():
 
 # task 1
 
-from cryptography.fernet import Fernet
+# from cryptography.fernet import Fernet
 @fileop.route('/secure')
 def secure():
     return render_template('securefile.html')
@@ -211,7 +224,7 @@ def securefile():
             else:
                  encrypteddata += char 
 
-        encryptedfile = open(secondfile,'w')
+        encryptedfile = open(secondfile,'w')        # opened file but not closed it, take look at how to write into file
         encryptedfile.write(encrypteddata)
 
         message = "file is encrypted"
@@ -253,4 +266,6 @@ def securefile():
         return render_template('securefile.html',message = message)
 
     return render_template('securefile.html')
-fileop.run(debug=True)
+
+if __name__ == "__main__":  # standard way to run file
+    fileop.run(debug=True)
