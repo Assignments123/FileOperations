@@ -29,19 +29,30 @@ def home():
 # task 3
 @fileop.route('/findroot',methods=['POST'])
 def findroot():
-    
-    rootdir = "C:/"
+    # function to find if a file is present in given directory or not
+    # and if present then returns all possible absolute paths with same file name
+    # dirname = "C:/"
     flag = False
     filetosearch = request.form['filename']
     if filetosearch =="":
-        msg="please give filename to search"
+        msg="Please enter file name"
         return render_template('base.html',msg=msg)
+    
+    dirname = request.form['dirname']
+
+    if dirname == "":
+        msg="Please enter directory name"
+        return render_template('base.html',msg=msg)
+    elif not os.path.exists(dirname):
+        msg="This directory is invalid , Please provide valid directory"
+        return render_template('base.html',msg=msg)
+        
     list = []
 
-    for relpath,dirs,files in os.walk(rootdir):
+    for relpath,dirs,files in os.walk(dirname):
         if(filetosearch in files):
             flag = True
-            fullpath = os.path.join(rootdir,relpath,filetosearch)
+            fullpath = os.path.join(dirname,relpath,filetosearch)
             list.append(fullpath)
     if flag == True:
         return render_template('base.html',list=list)
@@ -56,6 +67,8 @@ def syncpage():
         
 @fileop.route('/sync',methods=["POST"])
 def synchronization():
+    # function for synchronizing two directories so that 
+    # destination directory will have same set of files present in both source directory and.
 
     sourcedir = request.form['source']
     if sourcedir=="":
@@ -104,7 +117,6 @@ def synchronization():
         # method will copy file into destination
         shutil.copy(copyfile2,destination)
         copiedfiles.append(file)
-    print("copied files are : \n",copiedfiles)
 
     # code for deleting files which are only present in destination
     for file in val.right_only:
@@ -113,7 +125,6 @@ def synchronization():
         abspath = os.path.join(removefrom,removefile)
         os.remove(abspath)
         removedfiles.append(file)
-    print("removed files are :",removedfiles)
 
     # same files = same name and same content
     # common files = same name content maybe same or different
@@ -123,9 +134,13 @@ def synchronization():
         filename = file
         sourcepath = os.path.join(sourcedir,filename)
         destinationpath = os.path.join(destinationdir,filename)
-        shutil.copyfile(sourcepath,destinationpath)
+        # shutil.copyfile(sourcepath,destinationpath)
+        # with statement closes the file once operation is completed
+        # as it calls two built in methods i.e. __enter()__ and __exit()__.
+        with open(sourcepath,'r') as sourcefile:
+            with open(destinationpath,'a') as destinationfile:
+                shutil.copyfileobj(sourcefile,destinationfile)
         updatedfiles.append(file)
-    print("Updated files are :",updatedfiles)
 
     data = {}
     if len(copiedfiles)!=0:
@@ -158,24 +173,24 @@ def synchronization():
 def secure():
     return render_template('securefile.html')
 
-
-
-
 @fileop.route('/securefile' ,methods=['POST'])
 def securefile():
+    # function for encrypting and decrypting the files
+    # while encrypting a file's data, encrypted data gets stored in another file.
+    # and by decryption , encrypted data can be recovered as original data and can be saved to another file.
     
     # for creating a new key
     # key = Fernet.generate_key()
     # print(key)
 
     key = os.getenv('KEY')
-    print("key is : ",key)
+    # print("key is : ",key)
     # firstfile = "trial.txt"
     # secondfile = "trial2.txt"
 
     firstfile = request.form['firstfile']
     
-    print(firstfile)
+    # print(firstfile)
     
     secondfile = request.form['secondfile']
 
@@ -194,9 +209,10 @@ def securefile():
             return render_template('securefile.html',message = message)
 
         # code for encrypting the normal data
-        encryptfile = open(firstfile,'r')
-        data = encryptfile.read()
-        print("data",data)
+        # encryptfile = open(firstfile,'r')
+        with open(firstfile,'r') as encryptfile:
+            data = encryptfile.read()
+
         # using cryptography package
         # encrypted = f.encrypt(data)
         # print(encrypted)
@@ -210,7 +226,7 @@ def securefile():
             
             if char.isalpha():
                 if char.isupper():
-                    print(char)
+                    # print(char)
                     # encrypted = str(key[ord(char) -ord('A')]).upper
                     encrypted = key[ord(char) - ord('A')].upper()
                     encrypteddata = encrypteddata + encrypted
@@ -220,8 +236,11 @@ def securefile():
                     encrypteddata = encrypteddata + encrypted
             else:
                  encrypteddata = encrypteddata + char 
-        encryptedfile = open(secondfile,'w')        # opened file but not closed it, take look at how to write into file
-        encryptedfile.write(encrypteddata)
+        # encryptedfile = open(secondfile,'w')        # opened file but not closed it, take look at how to write into file
+        # file will be closed once operation is done because of with statement
+        # it calls __exit()__ built in function which closes the file
+        with open(secondfile,'w') as encryptedfile:
+            encryptedfile.write(encrypteddata)
 
         message = "file is encrypted"
 
@@ -235,8 +254,9 @@ def securefile():
 
         # code for decrypting the data
         # dont use rb mode because it gives ascii values
-        decryptfile = open(firstfile,'r')
-        data = decryptfile.read()
+        # decryptfile = open(firstfile,'r')
+        with open(firstfile,'r') as decryptfile:
+            data = decryptfile.read()
 
         # decrypted = f.decrypt(data)
         # print("decrypted data is : ",decrypted)
@@ -254,8 +274,9 @@ def securefile():
             else:
                 decrypteddata += char
 
-        decryptfile = open(secondfile,'w')
-        decryptfile.write(decrypteddata)
+        # decryptfile = open(secondfile,'w')
+        with open(secondfile,'w') as decryptfile:
+            decryptfile.write(decrypteddata)
 
         message = "file is decrypted"
         return render_template('securefile.html',message = message)
