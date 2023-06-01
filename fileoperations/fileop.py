@@ -29,7 +29,7 @@ def home():
 # task 3
 @fileop.route('/findroot',methods=['POST'])
 def findroot():
-
+    
     rootdir = "C:/"
     flag = False
     filetosearch = request.form['filename']
@@ -208,22 +208,18 @@ def securefile():
         encrypteddata = ""
         for char in data:
             
-            encrypteddata =""
             if char.isalpha():
                 if char.isupper():
                     print(char)
                     # encrypted = str(key[ord(char) -ord('A')]).upper
                     encrypted = key[ord(char) - ord('A')].upper()
-                    encrypteddata +=  encrypted
-                    print(encrypted)
+                    encrypteddata = encrypteddata + encrypted
                 else:
                     # encrypted = str(key[ord(char) - ord('a')]).lower
                     encrypted = key[ord(char) - ord('a')].lower()
-                    encrypteddata +=  encrypted
-                    print("here", encrypteddata)
+                    encrypteddata = encrypteddata + encrypted
             else:
-                 encrypteddata += char 
-
+                 encrypteddata = encrypteddata + char 
         encryptedfile = open(secondfile,'w')        # opened file but not closed it, take look at how to write into file
         encryptedfile.write(encrypteddata)
 
@@ -241,7 +237,6 @@ def securefile():
         # dont use rb mode because it gives ascii values
         decryptfile = open(firstfile,'r')
         data = decryptfile.read()
-        print("data is ",data)
 
         # decrypted = f.decrypt(data)
         # print("decrypted data is : ",decrypted)
