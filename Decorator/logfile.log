@@ -1,0 +1,16 @@
+INFO:root:Values : function name handler_function, Passed Arguments 10, returned values 3628800
+INFO:root:Function name handler_function, Passed Arguments 10, Returned values 3628800
+INFO:root:Function name : handler_function, Passed Arguments : 10, Returned values : 3628800
+INFO:root:Function name : handler_function2, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 15:06:32,937 - INFO - Function name : handler_function2, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 15:06:59,148 , INFO , Function name : handler_function2, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 15:11:04,319 , INFO , Function name : handler_function, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 15:11:54,641 , INFO , Function name : handler_function2, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 15:12:30,973 , INFO , Function name : calculate_factorial, Passed Arguments : 10, Returned values : 3628800
+2023-05-31 16:07:56,204 , INFO , Function name : calculate_factorial, Passed Arguments : (10,),                     Returned values : 3628800
+2023-05-31 16:25:45,562 , INFO , Function name : calculate_factorial, Passed Arguments : (10,),                     Returned values : 36288.0
+2023-05-31 16:26:09,234 , INFO , Function name : calculate_factorial, Passed Arguments : (10,),                     Returned values : 36288
+2023-05-31 17:03:20,136 , INFO , Function name : calculate_factorial, Passed Arguments : (-10,),                     Returned values : None
+2023-05-31 17:03:58,407 , INFO , Function name : calculate_factorial, Passed Arguments : (-10,),                     Returned values : None
+2023-05-31 17:05:24,789 , INFO , Function name : calculate_factorial, Passed Arguments : ('abc',),                     Returned values : None
+2023-05-31 17:09:06,832 , INFO , Function name : calculate_factorial, Passed Arguments : abc,                     Returned values : None
