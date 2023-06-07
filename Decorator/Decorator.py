@@ -87,5 +87,7 @@ def calculate_factorial(num):
     except TypeError:
         print("Please provide positive integer values only")
 
-# call function
-calculate_factorial("abc")
+if __name__ == "__main__":
+
+    # call function
+    calculate_factorial(3)

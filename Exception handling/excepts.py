@@ -1,8 +1,10 @@
 def Exceptionhandling():
-    # funciton for performing different operations on a file 
-    # like calculating average of all positive numbers , 
-    # division of two consecutive numbers till end ,
-    # and handle if any exception occurs
+    """funciton for performing different operations on a file 
+    like calculating average of all positive numbers , 
+    division of two consecutive numbers till end ,
+    and handle if any exception occurs
+    """
+    # docstring for function - sample
     try:
         fileopen = open('number.txt',"r")
         data = fileopen.readlines()

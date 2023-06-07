@@ -14,3 +14,6 @@ INFO:root:Function name : handler_function2, Passed Arguments : 10, Returned val
 2023-05-31 17:03:58,407 , INFO , Function name : calculate_factorial, Passed Arguments : (-10,),                     Returned values : None
 2023-05-31 17:05:24,789 , INFO , Function name : calculate_factorial, Passed Arguments : ('abc',),                     Returned values : None
 2023-05-31 17:09:06,832 , INFO , Function name : calculate_factorial, Passed Arguments : abc,                     Returned values : None
+2023-06-07 15:50:40,436 , INFO , Function name : calculate_factorial, Passed Arguments : abc,                     Returned values : None
+2023-06-07 15:51:39,600 , INFO , Function name : calculate_factorial, Passed Arguments : 45,                     Returned values : 119622220865480194561963161495657715064383733760000000000
+2023-06-07 15:52:08,032 , INFO , Function name : calculate_factorial, Passed Arguments : 3,                     Returned values : 6

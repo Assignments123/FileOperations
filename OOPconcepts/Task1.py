@@ -1,4 +1,4 @@
-# code for student class where encapsulation is achieved using getter method 
+""" code for student class where encapsulation is achieved using getter method """
 class Student:
     
     def __init__(self,name, roll_number, grade):
